@@ -1,0 +1,16 @@
+create database chat;
+use chat;
+create table if not exists users ( 
+     id         SERIAL PRIMARY KEY, 
+     name       VARCHAR(20) not null, 
+     login      VARCHAR(20) not null,
+     password   VARCHAR(10) not null
+); 
+create table if not exists messages( 
+     id         SERIAL PRIMARY KEY, 
+     id_sender       int references users(id), 
+     id_receiver      int references users(id),
+     text text,
+     date datetime default now(),
+     status VARCHAR(10) check (status in ('sended', 'received', 'readed'))
+); 
